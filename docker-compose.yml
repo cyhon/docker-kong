@@ -1,0 +1,22 @@
+version: "2"
+services:
+  kong:
+    image: "docker.finogeeks.club/finochat/gateway"
+#image: telefonica/kong-prometheus:0.11.0-4
+    privileged: true
+    depends_on:
+      - kong-database
+    ports:
+      - 8000:8000
+    command: kong start --run-migrations
+    environment:
+      - KONG_DATABASE=postgres
+      - KONG_PG_HOST=kong-database
+      - KONG_PG_PASSWORD=123123
+  kong-database:
+    image: "docker.finogeeks.club/base/postgres:1.0.0"
+    privileged: true
+    environment:
+      POSTGRES_DB: kong
+      POSTGRES_USER: kong
+      POSTGRES_PASSWORD: 123123

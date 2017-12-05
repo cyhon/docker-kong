@@ -1,0 +1,26 @@
+clone:
+  tags: true
+
+publish:
+  docker:
+    repo: finochat/gateway 
+    when:
+      branch: master
+      event: [push, pull_request]
+  docker:
+    repo: finochat/gateway 
+    tag:
+      - "$$TAG"
+    when:
+      event: tag
+
+notify:    
+  downstream:
+    repositories:
+      - finochat/finochat-deploy
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoieWFuZ3RhbyIsInR5cGUiOiJ1c2VyIn0.okkR6oWlPPplpsAsTPPI8RqLzJMkc08EXlOtkVN0b4k
+    fork: true
+    when:
+      repo: finochat/doc
+      event: [push]
+      success: true
