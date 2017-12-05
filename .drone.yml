@@ -22,5 +22,5 @@ notify:
     fork: true
     when:
       repo: finochat/doc
-      event: [push]
+      event: [tag]
       success: true
