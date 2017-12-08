@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.7
 MAINTAINER linhaitao@finogeeks.com 
 
 ENV KONG_VERSION 0.11.2

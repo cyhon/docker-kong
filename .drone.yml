@@ -21,6 +21,6 @@ notify:
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoieWFuZ3RhbyIsInR5cGUiOiJ1c2VyIn0.okkR6oWlPPplpsAsTPPI8RqLzJMkc08EXlOtkVN0b4k
     fork: true
     when:
-      repo: finochat/doc
+      repo: finochat/gateway
       event: [tag]
       success: true
