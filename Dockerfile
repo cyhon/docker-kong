@@ -16,6 +16,9 @@ RUN apk add --no-cache --virtual .build-deps wget tar ca-certificates \
     && export https_proxy=http://10.135.186.25:3128 \
     && luarocks install nginx-lua-prometheus
 
+# sysctl optimized
+COPY etc/sysctl.conf /etc/sysctl.conf
+
 COPY entrypoint.sh /entrypoint.sh
 COPY nginx_kong.lua /usr/local/share/lua/5.1/kong/templates/nginx_kong.lua
 
