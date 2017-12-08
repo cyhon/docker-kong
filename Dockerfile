@@ -12,11 +12,12 @@ RUN apk add --no-cache --virtual .build-deps wget tar ca-certificates \
 	&& rm -rf /tmp/usr \
 	&& cp -R /tmp/etc / \
 	&& rm -rf /tmp/etc \
-	&& apk del .build-deps tar wget
+	&& apk del .build-deps tar wget \
+    && export https_proxy=http://10.135.186.25:3128 \
+    && luarocks install nginx-lua-prometheus
 
 COPY entrypoint.sh /entrypoint.sh
 COPY nginx_kong.lua /usr/local/share/lua/5.1/kong/templates/nginx_kong.lua
-COPY prometheus.lua /usr/local/share/lua/5.1/prometheus.lua
 
 ENTRYPOINT ["/entrypoint.sh"]
 
