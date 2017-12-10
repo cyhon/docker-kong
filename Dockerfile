@@ -16,6 +16,11 @@ RUN apk add --no-cache --virtual .build-deps wget tar ca-certificates \
     && export https_proxy=http://10.135.186.25:3128 \
     && luarocks install nginx-lua-prometheus
 
+# redirect logs
+RUN ln -sf /dev/stdout /usr/local/kong/logs/admin_access.log \
+    && ln -sf /dev/stdout /usr/local/kong/logs/access.log \
+    && ln -sf /dev/stderr /usr/local/kong/logs/error.log
+
 # sysctl optimized
 COPY etc/sysctl.conf /etc/sysctl.conf
 
