@@ -17,10 +17,12 @@ RUN apk add --no-cache --virtual .build-deps wget tar ca-certificates \
     && luarocks install nginx-lua-prometheus
 
 # redirect logs
+# https://github.com/moby/moby/issues/19616#issuecomment-174355979
+# don't launch your container with --pid=host
 RUN mkdir -p /usr/local/kong/logs \
-    && ln -sf /dev/stdout /usr/local/kong/logs/admin_access.log \
-    && ln -sf /dev/stdout /usr/local/kong/logs/access.log \
-    && ln -sf /dev/stderr /usr/local/kong/logs/error.log
+    && ln -sf /proc/1/fd/1 /usr/local/kong/logs/admin_access.log \
+    && ln -sf /proc/1/fd/1 /usr/local/kong/logs/access.log \
+    && ln -sf /proc/1/fd/2 /usr/local/kong/logs/error.log
 
 # sysctl optimized
 COPY etc/sysctl.conf /etc/sysctl.conf
